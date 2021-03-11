@@ -8,10 +8,10 @@
 import Foundation
 import SwiftUI
 
-class RecipeContainer{
+class RecipeContainer {
     var RecipeName: String
     var Description: String
-    init(){
+    init() {
         RecipeName = ""
         Description = ""
     }
