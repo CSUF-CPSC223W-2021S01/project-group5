@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
+
+class RecipeContainer{
+    var RecipeName: String
+    init(){
+        RecipeName = ""
+    }
+}
