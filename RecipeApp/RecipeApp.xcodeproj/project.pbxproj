@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A7A2EC025FA9DE000449C11 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2A7A2EBF25FA9DE000449C11 /* .gitignore */; };
 		A0E4870E25F99B6300ACC3D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4870D25F99B6300ACC3D5 /* AppDelegate.swift */; };
 		A0E4871025F99B6300ACC3D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4870F25F99B6300ACC3D5 /* SceneDelegate.swift */; };
 		A0E4871225F99B6300ACC3D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4871125F99B6300ACC3D5 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A7A2EBF25FA9DE000449C11 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A0E4870A25F99B6300ACC3D5 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0E4870D25F99B6300ACC3D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0E4870F25F99B6300ACC3D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		A0E4870125F99B6300ACC3D5 = {
 			isa = PBXGroup;
 			children = (
+				2A7A2EBF25FA9DE000449C11 /* .gitignore */,
 				A0E4870C25F99B6300ACC3D5 /* RecipeApp */,
 				A0E4872325F99B6400ACC3D5 /* RecipeAppTests */,
 				A0E4872E25F99B6400ACC3D5 /* RecipeAppUITests */,
@@ -234,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A7A2EC025FA9DE000449C11 /* .gitignore in Resources */,
 				A0E4871A25F99B6400ACC3D5 /* LaunchScreen.storyboard in Resources */,
 				A0E4871725F99B6400ACC3D5 /* Assets.xcassets in Resources */,
 				A0E4871525F99B6300ACC3D5 /* Main.storyboard in Resources */,
