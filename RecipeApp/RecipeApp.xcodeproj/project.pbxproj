@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A750B1F26034522005F44AD /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A750B1E26034522005F44AD /* Categories.swift */; };
 		2A7A2EC025FA9DE000449C11 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2A7A2EBF25FA9DE000449C11 /* .gitignore */; };
 		A0E4870E25F99B6300ACC3D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4870D25F99B6300ACC3D5 /* AppDelegate.swift */; };
 		A0E4871025F99B6300ACC3D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E4870F25F99B6300ACC3D5 /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A750B1E26034522005F44AD /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		2A7A2EBF25FA9DE000449C11 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A0E4870A25F99B6300ACC3D5 /* RecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0E4870D25F99B6300ACC3D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				A0E4871825F99B6400ACC3D5 /* LaunchScreen.storyboard */,
 				A0E4871B25F99B6400ACC3D5 /* Info.plist */,
 				C784894A25F9F6420043C01A /* RecipeContainer.swift */,
+				2A750B1E26034522005F44AD /* Categories.swift */,
 			);
 			path = RecipeApp;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			files = (
 				A0E4871225F99B6300ACC3D5 /* ViewController.swift in Sources */,
 				A0E4870E25F99B6300ACC3D5 /* AppDelegate.swift in Sources */,
+				2A750B1F26034522005F44AD /* Categories.swift in Sources */,
 				A0E4871025F99B6300ACC3D5 /* SceneDelegate.swift in Sources */,
 				C784894B25F9F6420043C01A /* RecipeContainer.swift in Sources */,
 			);
