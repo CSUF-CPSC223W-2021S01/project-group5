@@ -9,8 +9,18 @@ import UIKit
 
 class RecipeViewController: UIViewController {
 
+    var rImage: UIImage?
+    @IBOutlet private var recipeImage: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if rImage != nil {
+            recipeImage.image = rImage
+        } else {
+            //have label with recipe name and colored background or something
+        }
+
         // Do any additional setup after loading the view.
     }
     
