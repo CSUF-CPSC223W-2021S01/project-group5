@@ -4,6 +4,8 @@
 //
 //  Created by Mark Gonzalez on 3/10/21.
 //
+// everything is tested with an iPhone 11 sim
+// 
 
 import UIKit
 
@@ -12,6 +14,19 @@ enum searchAtt: String {
     case ingredient = "Ingredient"
     case time = "Time"
 }
+
+class TestRecipe {
+    var name: String
+    var image: UIImage? {
+        return UIImage(named: name)
+    }
+
+    init(_ name: String) {
+        self.name = name
+    }
+}
+
+let testRecipes: [TestRecipe] = [TestRecipe("burger"), TestRecipe("pancake"), TestRecipe("ramen"), TestRecipe("Tree 0")]
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -54,35 +69,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     // funtion that is always called when segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard sender == nil else {
+        switch sender {
+        case is UIButton: // segue for adding a recipe
+            print("UIButton")
             segue.destination.navigationItem.title = "New Recipe"
-            return
+        case is IndexPath: // segue for selecting recipe
+            print("IndexPath")
+            let index = sender as! IndexPath
+            let newView = segue.destination as! RecipeViewController
+            newView.navigationItem.title = testRecipes[index.row].name
+            newView.rImage = testRecipes[index.row].image
+        default:
+            print("segue failed")
         }
-
-        // set navi title to selected recipe
-        segue.destination.navigationItem.title = "Existing Recipe"
     }
 
 //==================================================================
 // Recipe collection view code
 //==================================================================
     @IBOutlet var recipeCollectionView: UICollectionView!
-    let cellSize = 184 //X by X (good sizes are 184, 118, 52 -> 2, 3, 4 tiles)
-
-    class TestRecipe {
-        var name: String
-        var image: UIImage? {
-            return UIImage(named: name)
-        }
-
-        init(_ name: String) {
-            self.name = name
-        }
-    }
-
-    let testRecipes: [TestRecipe] = [TestRecipe("burger"), TestRecipe("pancake"), TestRecipe("ramen"), TestRecipe("Tree 0")]
+    let cellSize: CGFloat = CGFloat(184.0) //X by X (good sizes are 184, 118, 52 -> 2, 3, 4 tiles)
+    let tileColors: [UIColor] = [UIColor.systemRed, UIColor.systemOrange, UIColor.systemYellow,
+                                 UIColor.systemGreen, UIColor.systemBlue, UIColor.systemPurple]
     
-    // should return size of masterRecipes array
+    // should return size of recipe array
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return testRecipes.count
     }
@@ -91,22 +101,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = recipeCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RecipeCollectionViewCell
 
-        let cellView = UIImageView(frame: CGRect(x: 0, y: 0, width: cellSize, height: cellSize))
-        let cellImage = testRecipes[indexPath.row].image
-        cellView.image = cellImage
-        cell.contentView.addSubview(cellView)
+// create image view then fill it (size is forced to cellSize x cellSize)
+//        let cellImage = testRecipes[indexPath.row].image
+//        let cellView = UIImageView(frame: CGRect(x: 0, y: 0, width: cellSize, height: cellSize))
+//        cellView.image = cellImage
+//        cell.contentView.addSubview(cellView)
+
+        // fill image view in storyboard
+        let image = cell.contentView.subviews[0] as! UIImageView
+        image.image = testRecipes[indexPath.row].image
+        cell.backgroundColor = tileColors[indexPath.row % tileColors.count]
+// ideally, the user should be able to crop an image to fit cellSize x cellSize
 
         return cell
     }
 
-    // sets size of each cell (184x184 or 130x130 are good)
+    // sets size of each cell (184x184, 118x118, 52x52 are good)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: cellSize, height: cellSize)
     }
 
     // goes to recipe view when a cell is tapped
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        go2recipes(nil)
+        go2recipes(indexPath)
     }
 
 }
