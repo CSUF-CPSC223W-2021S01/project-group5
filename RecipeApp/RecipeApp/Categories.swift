@@ -9,14 +9,18 @@
 //
 
 import Foundation
-// array that stores every recipe. The "All" Category.
-// Issue: Sorting alphabetical may be difficult with array, consider using
-//        a dictionary instead.
+
+// Description: Array that stores every recipe. The "All" Category.
+// Note:    Since this is an array of class objects, each element is a reference
+//          to an instance.
+// Issue:   Sorting alphabetical may be difficult with array, consider using
+//          a dictionary instead, where key is recipe name and value is a
+//          RecipeContainer.
 var MasterList: [RecipeContainer] = []
 
-// Category dictionary. key = "name", value = array of recipes in category
-// Issue: sorting the array may be diffult so consider changing to
-//        dictionary of [String: Dictionary(String, Recipe Container)]
+// Description: Category dictionary. key = "name", value = array of recipes in category
+// Issue:   sorting the array may be diffult so consider changing to
+//          dictionary of dictionary instead of dictionary of array.
 var Categories: [String: [RecipeContainer]] = ["All": MasterList]
 
 // AddCategory =================================================================
@@ -34,7 +38,7 @@ func AddCategory(_ CName: String) -> Bool {
     //        How would I access this array?
     Categories[CName] = [RecipeContainer]()
     return true
-}
+} // end of AddCategory()
 
 // RemoveCategory ==============================================================
 // Description: Removes the given category from the Categories Dictionary.
@@ -42,57 +46,56 @@ func AddCategory(_ CName: String) -> Bool {
 // Output:      Bool - returns false if category not found, true on removal
 // =============================================================================
 func RemoveCategory(_ CName: String) -> Bool {
-    // checks if category exists, returns false if not found
+    // checks if category exists and removes, returns false if not found
     guard Categories.removeValue(forKey: CName) != nil else {
         return false
     }
 
     // passed guard so it was removed.
     return true
-}
+} // end of RemoveCategory()
 
 // AddRecToCat =================================================================
 // Description: Appends recipe to the given category
 // Input: CName: String - Category to add to
 // Output: (Bool, Int) - on success returns true and new count
 // =============================================================================
-func AddRecToCat (_ CName:String, newRecipe: RecipeContainer) -> (Bool, Int) {
+func AddRecToCat(_ CName: String, newRecipe: RecipeContainer) -> (Bool, Int) {
     // checks if category exists
-    guard Categories[CName] != nil else{
+    guard Categories[CName] != nil else {
         return (false, -1)
     }
-    // loop to check if recipe exists
-    /*
-    for _______ {
-        //if found return (false, index)
-     
-     }
-    */
-    
-    // Appends recipe to the array for the given key CName
+
+    // loop to check if an instance of the recipe exists in array already
+    for rec in Categories[CName]! {
+        if rec === newRecipe {
+            return (false, 0)
+        }
+    }
+
+    // Appends recipe to the array in the category
     Categories[CName]!.append(newRecipe)
-    return (true, (Categories[CName]!.count))
-}
+    return (true, Categories[CName]!.count)
+} // end of AddRecToCat ()
 
 // RemoveRecFromCat ============================================================
 // Description: Removes recipe from the category
-// Input: ?
-// Output: (Bool, Int) - on success returns true and new count
+// Input:   CName: String - name of category to remove from
+//          RecIndex: Int - Index to remove recipe from array in Category Dict.
+// Output: (Bool, Int) - on success returns true and new count of recipes
+//              (false, -1) - category not found
+//              (false, 0)  - index out of bounds
 // =============================================================================
-func RemoveRecFromCat (_ CName:String , remRecipe: RecipeContainer) -> (Bool, Int) {
+func RemoveRecFromCat(_ CName: String, RecIndex: Int) -> (Bool, Int) {
     // checks if category exists
-    guard Categories[CName] != nil else{
+    guard Categories[CName] != nil else {
         return (false, -1)
     }
-    
-    // loop thru array and remove indexes where remRecipe exists
-    /*
-    for _______ {
-        //if found remove it from the array then
-        return (true, Categories[CName]!.count)
-     }
-    */
-    
-    // wasn't found
-    return (false, 0)
-}
+    // checks index is in range
+    guard RecIndex >= 0, RecIndex < Categories[CName]!.count else {
+        return (false, 0)
+    }
+
+    Categories[CName]?.remove(at: RecIndex)
+    return (true, Categories[CName]!.count)
+} // end of RemoveRecFromCat()
