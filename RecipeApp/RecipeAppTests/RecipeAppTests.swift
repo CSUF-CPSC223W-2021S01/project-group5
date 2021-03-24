@@ -29,5 +29,9 @@ class RecipeAppTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    func testMasterListInitializer() {
+        let myMasterList = MasterList
+        XCTAssertEqual(myMasterList.count, 0)
+    }
 
 }
