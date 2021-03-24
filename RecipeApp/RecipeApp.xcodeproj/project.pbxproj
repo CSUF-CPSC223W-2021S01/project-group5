@@ -113,11 +113,11 @@
 				A0E4871325F99B6300ACC3D5 /* Main.storyboard */,
 				A0E4871625F99B6400ACC3D5 /* Assets.xcassets */,
 				A0E4871825F99B6400ACC3D5 /* LaunchScreen.storyboard */,
-				A0E4871B25F99B6400ACC3D5 /* Info.plist */,
 				C784894A25F9F6420043C01A /* RecipeContainer.swift */,
 				2A750B1E26034522005F44AD /* Categories.swift */,
 				A0F9AE6F260748A2001A4AE3 /* RecipeViewController.swift */,
 				A0F9AE74260773DC001A4AE3 /* RecipeCollectionViewCell.swift */,
+				A0E4871B25F99B6400ACC3D5 /* Info.plist */,
 			);
 			path = RecipeApp;
 			sourceTree = "<group>";
