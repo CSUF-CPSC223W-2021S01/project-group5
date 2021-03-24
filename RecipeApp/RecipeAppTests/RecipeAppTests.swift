@@ -37,4 +37,12 @@ class RecipeAppTests: XCTestCase {
         let myCategories = Categories
         XCTAssertEqual(myCategories.count, 1)
     }
-}
+    func testAddCategory() {
+        let myCategory = "myCategory"
+        XCTAssert(AddCategory(myCategory) == true)
+    }
+    func testExistingCategory() {
+        let myCategory = "myCategory"
+        AddCategory(myCategory)
+        XCTAssert(AddCategory(myCategory) == false)
+    }}
