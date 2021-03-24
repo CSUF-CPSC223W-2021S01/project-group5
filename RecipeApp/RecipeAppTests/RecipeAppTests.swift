@@ -33,5 +33,8 @@ class RecipeAppTests: XCTestCase {
         let myMasterList = MasterList
         XCTAssertEqual(myMasterList.count, 0)
     }
-
+    func testCategories() {
+        let myCategories = Categories
+        XCTAssertEqual(myCategories.count, 1)
+    }
 }
