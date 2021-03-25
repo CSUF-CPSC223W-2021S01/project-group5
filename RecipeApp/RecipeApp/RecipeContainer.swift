@@ -19,8 +19,8 @@ class RecipeContainer {
         return nil
     }
     var Ingredients: [String: String]
-    var Steps: [(String, Int?)]
-    //arrayLiteral creates an empty array and accepts an empty string and an optional int, checks the time in steps I think, **I've no idea this was just spagetti code, might have to fix this later if not working**
+    var Steps: [(instruction: String, duration: Int?)] = [("", nil)]
+    //Accepts an empty string and an optional int, checks the time in steps, **might have to fix this later if not working**
     var TotalTime: String {
         return("Time: \(Steps.count)")
         //Counts the time in the string array from Steps and returns it
@@ -35,3 +35,4 @@ class RecipeContainer {
     //init for names and description
     
 }
+
