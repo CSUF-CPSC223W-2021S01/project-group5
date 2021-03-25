@@ -15,7 +15,7 @@ import Foundation
 //          to an instance.
 // Issue:   Sorting alphabetical may be difficult with array, consider using
 //          a dictionary instead, where key is recipe name and value is a
-//          RecipeContainer.
+//          RecipeContainer. 
 var MasterList: [RecipeContainer] = []
 
 class C_Categories{
