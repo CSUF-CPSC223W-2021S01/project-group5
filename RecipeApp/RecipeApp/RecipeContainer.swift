@@ -19,17 +19,18 @@ class RecipeContainer {
         return nil
     }
     var Ingredients: [String: String]
-    var Steps = Array<Any>(arrayLiteral: String(), Int?.self)
+    var Steps: [(String, Int?)]
     //arrayLiteral creates an empty array and accepts an empty string and an optional int, checks the time in steps I think, **I've no idea this was just spagetti code, might have to fix this later if not working**
     var TotalTime: String {
         return("Time: \(Steps.count)")
         //Counts the time in the string array from Steps and returns it
     }
     
-    init(_ RecipeName: String, _ Description: String, _ Ingredients: [String: String]) {
+    init(_ RecipeName: String, _ Description: String, _ Ingredients: [String: String], _ Steps: [(String, Int?)], _ TotalTime: String) {
         self.RecipeName = RecipeName
         self.Description = Description
         self.Ingredients = Ingredients
+        self.Steps = Steps
     }
     //init for names and description
     
