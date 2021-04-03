@@ -35,4 +35,3 @@ class RecipeContainer {
     //init for names and description
     
 }
-
