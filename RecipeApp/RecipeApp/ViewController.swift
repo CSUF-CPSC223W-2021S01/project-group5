@@ -20,13 +20,35 @@ class TestRecipe {
     var image: UIImage? {
         return UIImage(named: name)
     }
+    var description: String
+    var ingredients: [String: String] // ingredient: quantity
+    var steps: [(instruction: String, duration: Int)]
+    var time: Int // in minutes
+    
 
-    init(_ name: String) {
+    init(_ name: String, is description: String, with ingredients: [String: String],
+         steps: [(String, Int)], in time: Int) {
         self.name = name
+        self.description = description
+        self.ingredients = ingredients
+        self.steps = steps
+        self.time = time
     }
 }
 
-let testRecipes: [TestRecipe] = [TestRecipe("burger"), TestRecipe("pancake"), TestRecipe("ramen"), TestRecipe("Tree 0")]
+let secretFormula = ["hamburger buns": "2 buns", "mustard": "", "ketchup": "",
+                     "lettuce": "1", "tomato": "2 slices", "cheese": "1 slice",
+                     "pickle": "2 pieces", "onlon": "1 layer", "burger": "1 patty"]
+let testRecipes: [TestRecipe] = [
+    TestRecipe("burger", is: "It's a krabby patty", with: secretFormula,
+               steps: [("Call spongebob", 5)], in: 5),
+    TestRecipe("pancake", is: "It's pancakes", with: secretFormula,
+               steps: [("Just add water", 10)], in: 10),
+    TestRecipe("ramen", is: "Cup noodles", with: secretFormula,
+               steps: [("Add hot water", 0), ("Wait", 3)], in: 3),
+    TestRecipe("Tree 0", is: "It's an apple tree", with: secretFormula,
+               steps: [("plant seed", 5), ("water", 5), ("wait 50 years", 0)], in: 0)
+]
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -71,14 +93,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch sender {
         case is UIButton: // segue for adding a recipe
-            print("UIButton")
             segue.destination.navigationItem.title = "New Recipe"
         case is IndexPath: // segue for selecting recipe
-            print("IndexPath")
             let index = sender as! IndexPath
             let newView = segue.destination as! RecipeViewController
-            newView.navigationItem.title = testRecipes[index.row].name
-            newView.rImage = testRecipes[index.row].image
+            newView.currRecipe = testRecipes[index.row]
         default:
             print("segue failed")
         }
@@ -123,6 +142,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     // goes to recipe view when a cell is tapped
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //recipeCollectionView.deselectItem(at: indexPath, animated: true)
         go2recipes(indexPath)
     }
 
