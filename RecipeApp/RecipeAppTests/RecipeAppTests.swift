@@ -33,21 +33,23 @@ class RecipeAppTests: XCTestCase {
     func testMasterListInitializer() {
         let myMasterList = MasterList
         XCTAssertEqual(myMasterList.count, 0)
-    }
+    } // tests initialization of the MasterList
     
     func testCategories() {
         let myCategories = C_Categories()
         XCTAssertNotNil(myCategories.Categories)
-    }
+    } // tests if there is existing content within the Categories variable
 
     func testAddCategory() {
+        let myClassObject = C_Categories()
         let myCategory = "myCategory"
-        XCTAssert(AddCategory(myCategory) == true)
-    }
+        XCTAssert(myClassObject.AddCategory(myCategory) == true)
+    } // tests if the AddCategory function adds the category
     
     func testExistingCategory() {
+        let myClassObject = C_Categories()
         let myCategory = "myCategory"
-        AddCategory(myCategory)
-        XCTAssert(AddCategory(myCategory) == false)
-    }
+        myClassObject.AddCategory(myCategory)
+        XCTAssert(myClassObject.AddCategory(myCategory) == false)
+    } // tests for the case when a category already exists using AddCategory
 }
