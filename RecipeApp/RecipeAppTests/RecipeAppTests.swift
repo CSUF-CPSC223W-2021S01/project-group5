@@ -29,20 +29,43 @@ class RecipeAppTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
     func testMasterListInitializer() {
         let myMasterList = MasterList
         XCTAssertEqual(myMasterList.count, 0)
-    }
+    } // tests initialization of the MasterList
+    
     func testCategories() {
-        let myCategories = Categories
-        XCTAssertEqual(myCategories.count, 1)
-    }
+        let myCategories = C_Categories()
+        XCTAssertNotNil(myCategories.Categories)
+    } // tests if there is existing content within the Categories variable
+
     func testAddCategory() {
-        let myCategory = "myCategory"
-        XCTAssert(AddCategory(myCategory) == true)
-    }
-    func testExistingCategory() {
-        let myCategory = "myCategory"
-        AddCategory(myCategory)
-        XCTAssert(AddCategory(myCategory) == false)
-    }}
+        let myClassObject = C_Categories()
+        let categoryName = "categoryName"
+        XCTAssert(myClassObject.AddCategory(categoryName) == true)
+    } // tests if the AddCategory function adds the category
+    
+    func testAddCategoryExists() {
+        let myClassObject = C_Categories()
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        XCTAssert(myClassObject.AddCategory(categoryName) == false)
+    } // tests for the case when a category already exists using AddCategory
+    
+    func testRemoveCategoryExists() {
+        let myClassObject = C_Categories()
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        XCTAssert(myClassObject.RemoveCategory(categoryName) == true)
+    } // tests for the case when removing an exisisting category
+    
+    func testRemoveCategory() {
+        let myClassObject = C_Categories()
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        myClassObject.RemoveCategory(categoryName)
+        XCTAssert(myClassObject.RemoveCategory(categoryName) == false)
+    } //tests for the functionality of RemoveCategory and the case when a category doesn't exist
+
+}
