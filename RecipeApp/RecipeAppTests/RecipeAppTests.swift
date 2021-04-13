@@ -42,29 +42,30 @@ class RecipeAppTests: XCTestCase {
 
     func testAddCategory() {
         let myClassObject = C_Categories()
-        let myCategory = "myCategory"
-        XCTAssert(myClassObject.AddCategory(myCategory) == true)
+        let categoryName = "categoryName"
+        XCTAssert(myClassObject.AddCategory(categoryName) == true)
     } // tests if the AddCategory function adds the category
     
     func testAddCategoryExists() {
         let myClassObject = C_Categories()
-        let myCategory = "myCategory"
-        myClassObject.AddCategory(myCategory)
-        XCTAssert(myClassObject.AddCategory(myCategory) == false)
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        XCTAssert(myClassObject.AddCategory(categoryName) == false)
     } // tests for the case when a category already exists using AddCategory
     
     func testRemoveCategoryExists() {
         let myClassObject = C_Categories()
-        let myCategory = "myCategory"
-        myClassObject.AddCategory(myCategory)
-        XCTAssert(myClassObject.RemoveCategory(myCategory) == true)
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        XCTAssert(myClassObject.RemoveCategory(categoryName) == true)
     } // tests for the case when removing an exisisting category
     
     func testRemoveCategory() {
         let myClassObject = C_Categories()
-        let myCategory = "myCategory"
-        myClassObject.AddCategory(myCategory)
-        myClassObject.RemoveCategory(myCategory)
-        XCTAssert(myClassObject.RemoveCategory(myCategory) == false)
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        myClassObject.RemoveCategory(categoryName)
+        XCTAssert(myClassObject.RemoveCategory(categoryName) == false)
     } //tests for the functionality of RemoveCategory and the case when a category doesn't exist
+
 }
