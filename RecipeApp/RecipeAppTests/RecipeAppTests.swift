@@ -29,20 +29,25 @@ class RecipeAppTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
     func testMasterListInitializer() {
         let myMasterList = MasterList
         XCTAssertEqual(myMasterList.count, 0)
     }
+    
     func testCategories() {
-        let myCategories = Categories
-        XCTAssertEqual(myCategories.count, 1)
+        let myCategories = C_Categories()
+        XCTAssertNotNil(myCategories.Categories)
     }
+
     func testAddCategory() {
         let myCategory = "myCategory"
         XCTAssert(AddCategory(myCategory) == true)
     }
+    
     func testExistingCategory() {
         let myCategory = "myCategory"
         AddCategory(myCategory)
         XCTAssert(AddCategory(myCategory) == false)
-    }}
+    }
+}
