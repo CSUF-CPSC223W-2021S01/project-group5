@@ -67,5 +67,11 @@ class RecipeAppTests: XCTestCase {
         myClassObject.RemoveCategory(categoryName)
         XCTAssert(myClassObject.RemoveCategory(categoryName) == false)
     } //tests for the functionality of RemoveCategory and the case when a category doesn't exist
-
+    
+    func testAddRecToCat() {
+        let myClassObject = C_Categories()
+        let categoryName = "categoryName"
+        let myRecipeContainer = RecipeContainer("RecipeName", "Description", ["Ingredient": "Info"], [("Steps", nil)], "TotalTime")
+        XCTAssert(myClassObject.AddRecToCat(categoryName, newRecipe: myRecipeContainer) == (false, -1))
+    }
 }
