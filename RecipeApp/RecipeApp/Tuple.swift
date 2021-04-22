@@ -11,10 +11,15 @@ import Foundation
 // instead. The following is old vs new declartion for the var Steps in RC:
 // OLD: var Steps: [(instruction: String, duration: Int?)] = [("", nil)]
 // NEW: var Steps: [Tuple] = [Tuple("", nil)]
+// OR:  var Steps: [Tuple] = [Tuple(instruction: "", duration: nil)]
 class Tuple: Codable{
     var instruction: String
     var duration: Int?
-    init(instruction: String, duration: Int?){
+    init(_ instruction: String, _ duration: Int?){
+        self.instruction = instruction
+        self.duration = duration
+    }
+    init( instruction: String,  duration: Int?){
         self.instruction = instruction
         self.duration = duration
     }
