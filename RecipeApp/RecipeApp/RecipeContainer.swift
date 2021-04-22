@@ -33,5 +33,11 @@ class RecipeContainer {
         self.Steps = Steps
     }
     //init for names and description
-    
+/*    //||Empty Array called masterList||
+    //You can add values to the list,
+    //ex: masterList.append("string value") or let
+    var masterList = [String]() */
+    func newRecipe() {
+        
+    }
 }
