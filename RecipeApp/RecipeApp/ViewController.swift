@@ -15,6 +15,8 @@ enum searchAtt: String {
     case time = "Time"
 }
 
+// for test class
+/*
 class TestRecipe {
     var name: String
     var image: UIImage? {
@@ -39,6 +41,7 @@ class TestRecipe {
 let secretFormula = ["hamburger buns": "2 buns", "mustard": "", "ketchup": "",
                      "lettuce": "1", "tomato": "2 slices", "cheese": "1 slice",
                      "pickle": "2 pieces", "onlon": "1 layer", "burger": "1 patty"]
+
 let testRecipes: [TestRecipe] = [
     TestRecipe("burger", is: "It's a krabby patty", with: secretFormula,
                steps: [("Call spongebob", 5)], in: 5),
@@ -49,12 +52,34 @@ let testRecipes: [TestRecipe] = [
     TestRecipe("Tree 0", is: "It's an apple tree", with: secretFormula,
                steps: [("plant seed", 5), ("water", 5), ("wait 50 years", 0)], in: 0)
 ]
+*/
+
+var firstLoad = true
+func loadTest() {
+    if firstLoad {
+        let secretFormula = ["hamburger buns": "2 buns", "mustard": "", "ketchup": "",
+                             "lettuce": "1", "tomato": "2 slices", "cheese": "1 slice",
+                             "pickle": "2 pieces", "onlon": "1 layer", "burger": "1 patty"]
+        MasterList += [
+            RecipeContainer("burger", "It's a krabby patty", secretFormula,
+                            [("Call spongebob", 5)], "-1"),
+            RecipeContainer("pancake", "It's pancakes", secretFormula,
+                            [("Just add water", 10)], "-1"),
+            RecipeContainer("ramen", "Cup noodles", secretFormula,
+                            [("Add hot water", 0), ("Wait", 3)], "-1"),
+            RecipeContainer("Tree 0", "It's an apple tree", secretFormula,
+                            [("plant seed", 5), ("water", 5), ("wait 50 years", 0)], "-1")
+        ]
+
+        firstLoad = false
+    }
+}
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        loadTest()
     }
 
 //==================================================================
@@ -91,13 +116,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     // funtion that is always called when segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let newView = segue.destination as! RecipeViewController
         switch sender {
         case is UIButton: // segue for adding a recipe
-            segue.destination.navigationItem.title = "New Recipe"
+            let newRecipe = RecipeContainer("New Recipe", "", ["": ""], [("",nil)], "")
+            MasterList.append(newRecipe)
+            newView.currRecipe = MasterList.last
         case is IndexPath: // segue for selecting recipe
             let index = sender as! IndexPath
-            let newView = segue.destination as! RecipeViewController
-            newView.currRecipe = testRecipes[index.row]
+            newView.currRecipe = MasterList[index.row]
         default:
             print("segue failed")
         }
@@ -113,25 +140,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // should return size of recipe array
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testRecipes.count
+        return MasterList.count
+        // return testRecipes.count //for test class
     }
 
     // default function & controls cell content
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = recipeCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RecipeCollectionViewCell
 
-// create image view then fill it (size is forced to cellSize x cellSize)
-//        let cellImage = testRecipes[indexPath.row].image
-//        let cellView = UIImageView(frame: CGRect(x: 0, y: 0, width: cellSize, height: cellSize))
-//        cellView.image = cellImage
-//        cell.contentView.addSubview(cellView)
+        // create image view then fill it (size is forced to cellSize x cellSize)
+        // let cellImage = testRecipes[indexPath.row].image
+        // let cellView = UIImageView(frame: CGRect(x: 0, y: 0, width: cellSize, height: cellSize))
+        // cellView.image = cellImage
+        // cell.contentView.addSubview(cellView)
 
-        // fill image view in storyboard
-        let image = cell.contentView.subviews[0] as! UIImageView
-        image.image = testRecipes[indexPath.row].image
+        // fill image view in storyboard if available
+        if let image = UIImage(named: MasterList[indexPath.row].RecipeName) {
+            let imageView = cell.contentView.subviews[0] as! UIImageView
+            imageView.image = image
+        }
+        // image.image = testRecipes[indexPath.row].image // for test class
+
         cell.backgroundColor = tileColors[indexPath.row % tileColors.count]
-// ideally, the user should be able to crop an image to fit cellSize x cellSize
-
+        // ideally, the user should be able to crop an image to fit cellSize x cellSize
         return cell
     }
 
