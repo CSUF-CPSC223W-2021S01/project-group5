@@ -170,7 +170,9 @@ class RecipeViewController: UIViewController,
                 let quantity = row.1
                 let btn = row.2
                 if !editable { // is saving
-                    currRecipe.Ingredients[ingredient.text!] = quantity.text
+                    currRecipe.Ingredients.removeValue(forKey: loadIngredients[index.row].key)
+                    currRecipe.Ingredients[ingredient.text!] = quantity.text!
+                    loadIngredients[index.row] = (ingredient.text!, quantity.text!)
                 }
                 ingredient.isEnabled = editable
                 quantity.isEnabled = editable
