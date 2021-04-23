@@ -57,6 +57,7 @@ let testRecipes: [TestRecipe] = [
 var firstLoad = true
 func loadTest() {
     if firstLoad {
+        ///*
         let secretFormula = ["hamburger buns": "2 buns", "mustard": "", "ketchup": "",
                              "lettuce": "1", "tomato": "2 slices", "cheese": "1 slice",
                              "pickle": "2 pieces", "onlon": "1 layer", "burger": "1 patty"]
@@ -70,7 +71,9 @@ func loadTest() {
             RecipeContainer("Tree 0", "It's an apple tree", secretFormula,
                             [Tuple("plant seed", 5), Tuple("water", 5), Tuple("wait 50 years", 0)], "-1")
         ]
-
+        //*/
+        //SaveData()
+        //LoadData()
         firstLoad = false
     }
 }

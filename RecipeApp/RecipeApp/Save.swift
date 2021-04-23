@@ -9,7 +9,8 @@ import Foundation
 
 let myDocDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let ML_URL = myDocDir.appendingPathComponent("MasterList").appendingPathExtension("plist")
-let CAT_URL = myDocDir.appendingPathComponent("MasterList").appendingPathExtension("plist")
+//let CAT_URL = myDocDir.appendingPathComponent("Category").appendingPathExtension("plist")
+
 // SaveData ====================================================================
 // Description: Encodes MasterList array then saves to file named myURL
 // Input:       N/A
@@ -22,10 +23,22 @@ func SaveData() {
         try? encodedMasterList.write(to: ML_URL)
     }
     
-}// end of saveData()
+}// end of SaveData()
 
-
-func LoadData() {
+// LoadData ====================================================================
+// Description: Encodes MasterList array then saves to file named myURL
+// Input:       N/A
+// Output:      true if decoded data was saved to MasterList
+//              false on failure
+// =============================================================================
+func LoadData() -> Bool{
+    let plistDecoder = PropertyListDecoder()
+    if let retMLData = try? Data(contentsOf: ML_URL),
+       let decodedML = try? plistDecoder.decode([RecipeContainer].self, from: retMLData)
+        {
+        MasterList = decodedML
+        return true
+    }
     
-    
-}
+    return false
+}// end of LoadData()
