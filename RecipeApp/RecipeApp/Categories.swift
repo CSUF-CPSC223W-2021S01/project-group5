@@ -10,11 +10,6 @@
 
 import Foundation
 
-// Description: Array that stores every recipe. The "All" Category.
-// Note:    Since this is an array of class objects, each element is a reference
-//          to an instance.
-var MasterList: [RecipeContainer] = []
-
 
 class C_Categories: Codable{
     // Category Dictionary. key is name of category, value is array of recipes in category
