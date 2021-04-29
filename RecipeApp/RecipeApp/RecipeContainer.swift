@@ -10,7 +10,7 @@
 import Foundation
 import SwiftUI
 
-class RecipeContainer {
+class RecipeContainer: Codable{
     //Creating a class for storing recipes, need to read up on docs about storage
     var RecipeName: String
     var Description: String?
@@ -19,14 +19,14 @@ class RecipeContainer {
         return nil
     }
     var Ingredients: [String: String]
-    var Steps: [(instruction: String, duration: Int?)] = [("", nil)]
+    var Steps: [Tuple] = [Tuple(instruction: "", duration: nil)]
     //Accepts an empty string and an optional int, checks the time in steps, **might have to fix this later if not working**
     var TotalTime: String {
         return("Time: \(Steps.count)")
         //Counts the time in the string array from Steps and returns it
     }
     
-    init(_ RecipeName: String, _ Description: String, _ Ingredients: [String: String], _ Steps: [(String, Int?)], _ TotalTime: String) {
+    init(_ RecipeName: String, _ Description: String, _ Ingredients: [String: String], _ Steps: [Tuple], _ TotalTime: String) {
         self.RecipeName = RecipeName
         self.Description = Description
         self.Ingredients = Ingredients

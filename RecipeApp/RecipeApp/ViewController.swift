@@ -57,20 +57,23 @@ let testRecipes: [TestRecipe] = [
 var firstLoad = true
 func loadTest() {
     if firstLoad {
+        ///*
         let secretFormula = ["hamburger buns": "2 buns", "mustard": "", "ketchup": "",
                              "lettuce": "1", "tomato": "2 slices", "cheese": "1 slice",
                              "pickle": "2 pieces", "onlon": "1 layer", "burger": "1 patty"]
         MasterList += [
             RecipeContainer("burger", "It's a krabby patty", secretFormula,
-                            [("Call spongebob", 5)], "-1"),
+                            [Tuple("Call spongebob", 5)], "-1"),
             RecipeContainer("pancake", "It's pancakes", secretFormula,
-                            [("Just add water", 10)], "-1"),
+                            [Tuple("Just add water", 10)], "-1"),
             RecipeContainer("ramen", "Cup noodles", secretFormula,
-                            [("Add hot water", 0), ("Wait", 3)], "-1"),
+                            [Tuple("Add hot water", 0), Tuple("Wait", 3)], "-1"),
             RecipeContainer("Tree 0", "It's an apple tree", secretFormula,
-                            [("plant seed", 5), ("water", 5), ("wait 50 years", 0)], "-1")
+                            [Tuple("plant seed", 5), Tuple("water", 5), Tuple("wait 50 years", 0)], "-1")
         ]
-
+        //*/
+        //SaveData()
+        //LoadData()
         firstLoad = false
     }
 }
@@ -119,7 +122,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let newView = segue.destination as! RecipeViewController
         switch sender {
         case is UIButton: // segue for adding a recipe
-            let newRecipe = RecipeContainer("New Recipe", "", ["": ""], [("",nil)], "")
+            let newRecipe = RecipeContainer("New Recipe", "", ["": ""], [Tuple("",nil)], "")
             MasterList.append(newRecipe)
             newView.currRecipe = MasterList.last
         case is IndexPath: // segue for selecting recipe
