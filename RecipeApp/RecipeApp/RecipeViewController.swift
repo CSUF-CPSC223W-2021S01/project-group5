@@ -76,7 +76,7 @@ class RecipeViewController: UIViewController,
         if sender.accessibilityIdentifier == "I" {
             loadIngredients.append((key: "", value: ""))
         } else {
-            currRecipe.Steps.append(("", nil))
+            currRecipe.Steps.append(Tuple("", nil))
         }
         tableView.insertRows(at: [indexPath!], with: .top)
         if let cell = tableView.cellForRow(at: indexPath!) {
@@ -184,9 +184,9 @@ class RecipeViewController: UIViewController,
                 let btn = row.2
                 if !editable { // is saving
                     if duration.text != "" {
-                        currRecipe.Steps[index.row] = (step.text!, Int(duration.text!))
+                        currRecipe.Steps[index.row] = Tuple(step.text!, Int(duration.text!))
                     } else {
-                        currRecipe.Steps[index.row] = (step.text!, nil)
+                        currRecipe.Steps[index.row] = Tuple(step.text!, nil)
                     }
                 }
                 step.isEnabled = editable
