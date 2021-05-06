@@ -30,11 +30,6 @@ class RecipeAppTests: XCTestCase {
         }
     }
     
-    func testMasterListInitializer() {
-        let myMasterList = MasterList
-        XCTAssertEqual(myMasterList.count, 0)
-    } // tests initialization of the MasterList
-    
     func testCategories() {
         let myCategories = C_Categories()
         XCTAssertNotNil(myCategories.Categories)
@@ -71,7 +66,7 @@ class RecipeAppTests: XCTestCase {
     func testAddRecToCat() {
         let myClassObject = C_Categories()
         let categoryName = "categoryName"
-        let myRecipeContainer = RecipeContainer("RecipeName", "Description", ["Ingredient": "Info"], [("Steps", nil)], "TotalTime")
+        let myRecipeContainer = RecipeContainer("RecipeName", "Description", ["Ingredient": "Info"], [Tuple("", nil)], "TotalTime")
         XCTAssert(myClassObject.AddRecToCat(categoryName, newRecipe: myRecipeContainer) == (false, -1))
     }
 }
