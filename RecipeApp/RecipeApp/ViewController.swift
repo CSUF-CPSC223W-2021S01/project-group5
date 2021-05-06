@@ -15,45 +15,6 @@ enum searchAtt: String {
     case time = "Time"
 }
 
-// for test class
-/*
-class TestRecipe {
-    var name: String
-    var image: UIImage? {
-        return UIImage(named: name)
-    }
-    var description: String
-    var ingredients: [String: String] // ingredient: quantity
-    var steps: [(instruction: String, duration: Int)]
-    var time: Int // in minutes
-    
-
-    init(_ name: String, is description: String, with ingredients: [String: String],
-         steps: [(String, Int)], in time: Int) {
-        self.name = name
-        self.description = description
-        self.ingredients = ingredients
-        self.steps = steps
-        self.time = time
-    }
-}
-
-let secretFormula = ["hamburger buns": "2 buns", "mustard": "", "ketchup": "",
-                     "lettuce": "1", "tomato": "2 slices", "cheese": "1 slice",
-                     "pickle": "2 pieces", "onlon": "1 layer", "burger": "1 patty"]
-
-let testRecipes: [TestRecipe] = [
-    TestRecipe("burger", is: "It's a krabby patty", with: secretFormula,
-               steps: [("Call spongebob", 5)], in: 5),
-    TestRecipe("pancake", is: "It's pancakes", with: secretFormula,
-               steps: [("Just add water", 10)], in: 10),
-    TestRecipe("ramen", is: "Cup noodles", with: secretFormula,
-               steps: [("Add hot water", 0), ("Wait", 3)], in: 3),
-    TestRecipe("Tree 0", is: "It's an apple tree", with: secretFormula,
-               steps: [("plant seed", 5), ("water", 5), ("wait 50 years", 0)], in: 0)
-]
-*/
-
 var firstLoad = true
 func loadTest() {
     if firstLoad {
@@ -72,8 +33,7 @@ func loadTest() {
                             [Tuple("plant seed", 5), Tuple("water", 5), Tuple("wait 50 years", 0)], "-1")
         ]
         //*/
-        //SaveData()
-        //LoadData()
+        SaveData()
         firstLoad = false
     }
 }
@@ -82,7 +42,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTest()
+        if LoadData() { print("Load successful") }
+        else {
+            print("Loading failed... Starting loadTest()")
+            loadTest()
+        }
     }
 
 //==================================================================
