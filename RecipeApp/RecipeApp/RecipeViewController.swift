@@ -136,6 +136,7 @@ class RecipeViewController: UIViewController,
         walkIndices()
         addButtons.i.isHidden = true
         addButtons.s.isHidden = true
+        SaveData()
     }
 
     func walkIndices() {
@@ -209,6 +210,24 @@ class RecipeViewController: UIViewController,
         let rowArr: [Int]
         rowArr = [1, 1, 1, loadIngredients.count + 1, currRecipe.Steps.count + 1]
         return rowArr[section]
+    }
+
+    // section headers
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Recipe Name"
+        case 1:
+            return "Cooking Time"
+        case 2:
+            return "Description"
+        case 3:
+            return "Ingredients"
+        case 4:
+            return "Steps"
+        default:
+            return "ERROR"
+        }
     }
 
     // initial cell loading (cells not shown on the screen are not considered loaded)
