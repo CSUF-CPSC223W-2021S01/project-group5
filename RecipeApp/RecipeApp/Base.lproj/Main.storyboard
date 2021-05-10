@@ -191,36 +191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1716" y="-218"/>
-        </scene>
-        <!--Categories-->
-        <scene sceneID="fcs-II-aFd">
-            <objects>
-                <tableViewController id="0Es-iX-mF2" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tbs-Iz-ceW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="oyi-rG-0aZ">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oyi-rG-0aZ" id="omU-8S-Wxy">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="0Es-iX-mF2" id="bQv-M9-fcZ"/>
-                            <outlet property="delegate" destination="0Es-iX-mF2" id="CEa-hZ-3OH"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Categories" id="iXV-Vx-FZQ"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pGH-nx-qAU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1716" y="518"/>
+            <point key="canvasLocation" x="1696" y="-218"/>
         </scene>
         <!--Categories-->
         <scene sceneID="bGi-1i-ff5">
@@ -232,12 +203,40 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="0Es-iX-mF2" kind="relationship" relationship="rootViewController" id="NdE-n0-Hlg"/>
+                        <segue destination="xEf-2W-OZ9" kind="relationship" relationship="rootViewController" id="YM9-99-uAQ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lde-L4-ooc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="754" y="518"/>
+        </scene>
+        <!--Categories-->
+        <scene sceneID="a0C-8O-WaC">
+            <objects>
+                <tableViewController id="xEf-2W-OZ9" customClass="CategoriesViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jWZ-p0-hsl" userLabel="CatTableView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="Zxv-0H-fft">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zxv-0H-fft" id="cSn-62-hjc">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Categories" id="900-8d-P3b"/>
+                    <connections>
+                        <outlet property="CatTableView" destination="jWZ-p0-hsl" id="zog-In-8ot"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vk5-0Z-fWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1695.6521739130435" y="517.63392857142856"/>
         </scene>
         <!--Recipe Name-->
         <scene sceneID="qie-uU-EfX">
@@ -404,6 +403,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="2U9-8N-O00" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ebj-X7-1EU">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -415,6 +415,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUJ-YA-kYn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-437.68115942028987" y="87.723214285714278"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ccO-sH-Pfd">
+            <objects>
+                <viewController id="Ggr-4G-dNj" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jBn-cW-MQQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cF9-9V-U8e"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ObO-1R-E36" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2693" y="518"/>
         </scene>
     </scenes>
     <resources>
