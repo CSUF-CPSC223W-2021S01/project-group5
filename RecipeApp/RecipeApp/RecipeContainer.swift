@@ -33,19 +33,37 @@ class RecipeContainer: Codable{
         self.Steps = Steps
     }
     //Below: Creating a search function that accepts an enum and string to return an array of recipes
-    func searchRecipe(search: searchAtt, recipe: String) -> Array<RecipeContainer>?{
-        RecipeArray[] = 
-        switch search {
+    func searchRecipe(attribute: searchAtt, searchStr: String) -> Array<RecipeContainer>?{
+       //searches through masterlist to match patterns and stores recipes
+        /*let RecipeArray = MasterList
+        for recipe in MasterList{
+            let _recipe = MasterList.RecipeContainer
+        }*/
+        var SearchArray: [RecipeContainer] = []
+        switch attribute {
         case searchAtt.name:
-            let _name = searchAtt.name
-            return _name
+            for recipe in MasterList {
+                if (recipe.RecipeName.range(of: searchStr) != nil){
+                    SearchArray.append(recipe)
+                }
+            }
+            return SearchArray
         case searchAtt.ingredient:
-            let _ingredient = searchAtt.ingredient
-            return _ingredient
+            for recipe in MasterList {
+                for ingredient in recipe.Ingredients {
+                    if (recipe.Ingredients.keys.contains(searchStr)) {
+                        SearchArray.append(recipe)
+                    }
+                }
+            }
+            return SearchArray
         case searchAtt.time:
-            let _time = searchAtt.time
-            return _time
+            for recipe in MasterList {
+                if ((recipe.TotalTime.range(of: searchStr)) != nil) {
+                    SearchArray.append(recipe)
+                }
+            }
+            return SearchArray
         }
-        return nil
     }
 }
