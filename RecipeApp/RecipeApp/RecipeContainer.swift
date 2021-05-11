@@ -50,10 +50,8 @@ class RecipeContainer: Codable{
             return SearchArray
         case searchAtt.ingredient:
             for recipe in MasterList {
-                for ingredient in recipe.Ingredients {
-                    if (recipe.Ingredients.keys.contains(searchStr)) {
-                        SearchArray.append(recipe)
-                    }
+                if (recipe.Ingredients.keys.contains(searchStr)) {
+                    SearchArray.append(recipe)
                 }
             }
             return SearchArray
