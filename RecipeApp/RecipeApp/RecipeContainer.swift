@@ -33,7 +33,19 @@ class RecipeContainer: Codable{
         self.Steps = Steps
     }
     //Below: Creating a search function that accepts an enum and string to return an array of recipes
-    func searchRecipe(_ search: searchAtt, recipe: String) -> Array<RecipeContainer>{
-        
+    func searchRecipe(search: searchAtt, recipe: String) -> Array<RecipeContainer>?{
+        RecipeArray[] = 
+        switch search {
+        case searchAtt.name:
+            let _name = searchAtt.name
+            return _name
+        case searchAtt.ingredient:
+            let _ingredient = searchAtt.ingredient
+            return _ingredient
+        case searchAtt.time:
+            let _time = searchAtt.time
+            return _time
+        }
+        return nil
     }
 }
