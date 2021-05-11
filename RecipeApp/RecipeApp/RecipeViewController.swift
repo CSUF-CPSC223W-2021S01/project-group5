@@ -12,6 +12,7 @@ class RecipeViewController: UIViewController,
 
     var rImage: UIImage?
     var currRecipe: RecipeContainer!
+    var mainMenu: ViewController!
 
     // used in tableView() to iterate through the dict using an index
     var loadIngredients = [(key: String, value: String)]()
@@ -36,7 +37,13 @@ class RecipeViewController: UIViewController,
             loadIngredients.append((ingredient.key, ingredient.value))
         }
     }
+//================================================================================================
+// segue code - for returning
+//================================================================================================
 
+    override func viewWillDisappear(_ animated: Bool) {
+        mainMenu.reloadCollectionView()
+    }
 //================================================================================================
 // table view code - custom
 //================================================================================================

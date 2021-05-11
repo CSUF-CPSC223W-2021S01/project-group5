@@ -84,6 +84,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     // funtion that is always called when segueing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let newView = segue.destination as! RecipeViewController
+        newView.mainMenu = self
         switch sender {
         case is UIButton: // segue for adding a recipe
             let newRecipe = RecipeContainer("New Recipe", "", ["": ""], [Tuple("",nil)], "")
@@ -96,7 +97,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             print("segue failed")
         }
     }
-
 //==================================================================
 // Recipe collection view code
 //==================================================================
@@ -108,25 +108,24 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     // should return size of recipe array
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return MasterList.count
-        // return testRecipes.count //for test class
     }
 
     // default function & controls cell content
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = recipeCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RecipeCollectionViewCell
-
-        // create image view then fill it (size is forced to cellSize x cellSize)
-        // let cellImage = testRecipes[indexPath.row].image
-        // let cellView = UIImageView(frame: CGRect(x: 0, y: 0, width: cellSize, height: cellSize))
-        // cellView.image = cellImage
-        // cell.contentView.addSubview(cellView)
-
         // fill image view in storyboard if available
+        let cell: UICollectionViewCell
         if let image = UIImage(named: MasterList[indexPath.row].RecipeName) {
+            cell = recipeCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             let imageView = cell.contentView.subviews[0] as! UIImageView
             imageView.image = image
+        } else {
+            // display the recipe's name
+            cell = recipeCollectionView.dequeueReusableCell(withReuseIdentifier: "plain", for: indexPath)
+            let nameLabel = cell.contentView.subviews[0] as! UILabel
+            nameLabel.textAlignment = .center
+            nameLabel.textColor = .white
+            nameLabel.text = MasterList[indexPath.row].RecipeName
         }
-        // image.image = testRecipes[indexPath.row].image // for test class
 
         cell.backgroundColor = tileColors[indexPath.row % tileColors.count]
         // ideally, the user should be able to crop an image to fit cellSize x cellSize
@@ -144,5 +143,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         go2recipes(indexPath)
     }
 
+    // called from RecipeViewController.swift when returning to this menu
+    func reloadCollectionView() {
+        recipeCollectionView.reloadData()
+    }
 }
 
