@@ -18,7 +18,6 @@ enum searchAtt: String {
 var firstLoad = true
 func loadTest() {
     if firstLoad {
-        ///*
         let secretFormula = ["hamburger buns": "2 buns", "mustard": "", "ketchup": "",
                              "lettuce": "1", "tomato": "2 slices", "cheese": "1 slice",
                              "pickle": "2 pieces", "onlon": "1 layer", "burger": "1 patty"]
@@ -32,13 +31,15 @@ func loadTest() {
             RecipeContainer("Tree 0", "It's an apple tree", secretFormula,
                             [Tuple("plant seed", 5), Tuple("water", 5), Tuple("wait 50 years", 0)], "-1")
         ]
-        //*/
         SaveData()
         firstLoad = false
     }
 }
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController,
+                      UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    var displayList: [RecipeContainer]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             print("Loading failed... Starting loadTest()")
             loadTest()
         }
+        displayList = MasterList
     }
 
 //==================================================================
@@ -73,6 +75,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         searchDropMenuPressed(sender)
     }
 
+    // calls a search function to replace the displayed list of recipes
+    @IBAction func searchValueChanged(_ sender: UITextField) {
+        guard let text = sender.text, text != "" else {
+            displayList = MasterList
+            recipeCollectionView.reloadData()
+            return
+        }
+
+        let found = searchRecipe(attribute: searchAttribute, searchStr: text)
+        guard !found.isEmpty else { return }
+        displayList = found
+        recipeCollectionView.reloadData()
+    }
+
 //==================================================================
 // Segue code
 //==================================================================
@@ -92,7 +108,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             newView.currRecipe = MasterList.last
         case is IndexPath: // segue for selecting recipe
             let index = sender as! IndexPath
-            newView.currRecipe = MasterList[index.row]
+            newView.currRecipe = displayList[index.row]
         default:
             print("segue failed")
         }
@@ -107,14 +123,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // should return size of recipe array
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MasterList.count
+        return displayList.count
     }
 
     // default function & controls cell content
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // fill image view in storyboard if available
         let cell: UICollectionViewCell
-        if let image = UIImage(named: MasterList[indexPath.row].RecipeName) {
+        if let image = UIImage(named: displayList[indexPath.row].RecipeName) {
             cell = recipeCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             let imageView = cell.contentView.subviews[0] as! UIImageView
             imageView.image = image
@@ -124,7 +140,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             let nameLabel = cell.contentView.subviews[0] as! UILabel
             nameLabel.textAlignment = .center
             nameLabel.textColor = .white
-            nameLabel.text = MasterList[indexPath.row].RecipeName
+            nameLabel.text = displayList[indexPath.row].RecipeName
         }
 
         cell.backgroundColor = tileColors[indexPath.row % tileColors.count]
