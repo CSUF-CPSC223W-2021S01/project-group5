@@ -35,6 +35,15 @@ class RecipeAppTests: XCTestCase {
         XCTAssertNotNil(myRecipeContainer)
     } // tests for the initialization of a RecipeContainer object
     
+    func testSearchRecipe() {
+        let myClassObject = C_Categories()
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        let myRecipeContainer = RecipeContainer("RecipeName", "Description", ["Ingredient": "Info"], [Tuple("", nil)], "TotalTime")
+        myClassObject.AddRecToCat(categoryName, newRecipe: myRecipeContainer) == (true, 1)
+        XCTAssertNotNil(myRecipeContainer.searchRecipe(attribute: searchAtt.name, searchStr: myRecipeContainer.RecipeName))
+    }
+    
     func testCategories() {
         let myCategories = C_Categories()
         XCTAssertNotNil(myCategories.Categories)
