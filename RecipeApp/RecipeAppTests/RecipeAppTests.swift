@@ -35,13 +35,31 @@ class RecipeAppTests: XCTestCase {
         XCTAssertNotNil(myRecipeContainer)
     } // tests for the initialization of a RecipeContainer object
     
-    func testSearchRecipe() {
+    func testSearchRecipeName() {
         let myClassObject = C_Categories()
         let categoryName = "categoryName"
         myClassObject.AddCategory(categoryName)
         let myRecipeContainer = RecipeContainer("RecipeName", "Description", ["Ingredient": "Info"], [Tuple("", nil)], "TotalTime")
         myClassObject.AddRecToCat(categoryName, newRecipe: myRecipeContainer) == (true, 1)
         XCTAssertNotNil(searchRecipe(attribute: searchAtt.name, searchStr: myRecipeContainer.RecipeName))
+    }
+    
+    func testSearchRecipeIngredients() {
+        let myClassObject = C_Categories()
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        let myRecipeContainer = RecipeContainer("RecipeName", "Description", ["Ingredient": "Info"], [Tuple("", nil)], "TotalTime")
+        myClassObject.AddRecToCat(categoryName, newRecipe: myRecipeContainer) == (true, 1)
+        XCTAssertNotNil(searchRecipe(attribute: searchAtt.ingredient, searchStr: "Ingredients"))
+    }
+    
+    func testSearchRecipeTotalTime() {
+        let myClassObject = C_Categories()
+        let categoryName = "categoryName"
+        myClassObject.AddCategory(categoryName)
+        let myRecipeContainer = RecipeContainer("RecipeName", "Description", ["Ingredient": "Info"], [Tuple("", nil)], "TotalTime")
+        myClassObject.AddRecToCat(categoryName, newRecipe: myRecipeContainer) == (true, 1)
+        XCTAssertNotNil(searchRecipe(attribute: searchAtt.time, searchStr: myRecipeContainer.TotalTime))
     }
     
     func testCategories() {
