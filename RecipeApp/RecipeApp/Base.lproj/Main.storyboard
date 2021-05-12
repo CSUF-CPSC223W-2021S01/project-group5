@@ -102,7 +102,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                         <connections>
-                                            <action selector="searchPressed:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="tOH-F5-TRM"/>
+                                            <action selector="searchValueChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="Utu-kj-nxr"/>
                                         </connections>
                                     </textField>
                                 </subviews>

@@ -75,18 +75,18 @@ class ViewController: UIViewController,
         searchDropMenuPressed(sender)
     }
 
-    // when enter is pressed, calls a search function to replace the displayed list of recipes
-    @IBAction func searchPressed(_ sender: UITextField) {
-        print("searching...")
-        /*
-        guard let found = searchRecipe(searchAttribute, sender.text) else {
-            print("No matches found");
+    // calls a search function to replace the displayed list of recipes
+    @IBAction func searchValueChanged(_ sender: UITextField) {
+        guard let text = sender.text, text != "" else {
+            displayList = MasterList
+            recipeCollectionView.reloadData()
             return
         }
-        print("found")
+
+        let found = searchRecipe(searchAttribute, text)
+        guard !found.isEmpty else { return }
         displayList = found
         recipeCollectionView.reloadData()
-        */
     }
 
 //==================================================================
