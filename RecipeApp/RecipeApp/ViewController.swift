@@ -83,7 +83,7 @@ class ViewController: UIViewController,
             return
         }
 
-        let found = searchRecipe(searchAttribute, text)
+        let found = searchRecipe(attribute: searchAttribute, searchStr: text)
         guard !found.isEmpty else { return }
         displayList = found
         recipeCollectionView.reloadData()

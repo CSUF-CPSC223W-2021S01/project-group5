@@ -41,7 +41,7 @@ class RecipeAppTests: XCTestCase {
         myClassObject.AddCategory(categoryName)
         let myRecipeContainer = RecipeContainer("RecipeName", "Description", ["Ingredient": "Info"], [Tuple("", nil)], "TotalTime")
         myClassObject.AddRecToCat(categoryName, newRecipe: myRecipeContainer) == (true, 1)
-        XCTAssertNotNil(myRecipeContainer.searchRecipe(attribute: searchAtt.name, searchStr: myRecipeContainer.RecipeName))
+        XCTAssertNotNil(searchRecipe(attribute: searchAtt.name, searchStr: myRecipeContainer.RecipeName))
     }
     
     func testCategories() {

@@ -35,7 +35,7 @@ class RecipeContainer: Codable{
 }
 
 //Below: Creating a search function that accepts an enum and string to return an array of recipes
-func searchRecipe(_ attribute: searchAtt,_ searchStr: String) -> Array<RecipeContainer>{
+func searchRecipe(attribute: searchAtt, searchStr: String) -> Array<RecipeContainer>{
    //searches through masterlist to match patterns and stores recipes
     /*let RecipeArray = MasterList
     for recipe in MasterList{
