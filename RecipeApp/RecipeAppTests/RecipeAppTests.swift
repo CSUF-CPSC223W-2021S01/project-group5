@@ -5,11 +5,10 @@
 //  Created by Jes Ray Manguiat on 3/10/21.
 //
 
-import XCTest
 @testable import RecipeApp
+import XCTest
 
 class RecipeAppTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -75,7 +74,7 @@ class RecipeAppTests: XCTestCase {
         myClassObject.AddCategory(categoryName)
         myClassObject.RemoveCategory(categoryName)
         XCTAssert(myClassObject.RemoveCategory(categoryName) == false)
-    } //tests for the functionality of RemoveCategory and the case when a category doesn't exist
+    } // tests for the functionality of RemoveCategory and the case when a category doesn't exist
     
     func testAddRecToCatFails() {
         let myClassObject = C_Categories()
