@@ -4,12 +4,14 @@
 //
 //  Created by Kai Eusebio on 5/9/21.
 //
+//  used this video for reference when making CategoriesViewController and RecipeListViewController
+//  https://youtu.be/mTmJnPabUWg
 
 import UIKit
 
 class CategoriesViewController: UIViewController {
-    // var CatKeys: [String] = Array(Categories.Categories.keys)
-    var CatKeys: [String] = ["Healthy", "Burgers", "Japanese", "Italian", "Spicy"]
+    var CatKeys: [String] = Array(Categories.Categories.keys)
+    //var CatKeys: [String] = ["Healthy", "Burgers", "Japanese", "Italian", "Spicy"]
     
     @IBOutlet var CatButton: UIButton!
     @IBOutlet var CatTableView: UITableView!
@@ -22,6 +24,7 @@ class CategoriesViewController: UIViewController {
 }
 
 extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CatKeys.count
     }
@@ -32,8 +35,19 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
-        print("Selected \(CatKeys[indexPath.row])")
+        tableView.deselectRow(at: indexPath, animated: true)
+        //print("Selected \(CatKeys[indexPath.row])")
+        
+        let CategoryName = CatKeys[indexPath.row]
+        var Rname: [String] = []
+        
+        for i in 0...(Categories.Categories[CatKeys[indexPath.row]]!.count-1) {
+            Rname.append((Categories.Categories[CatKeys[indexPath.row]]?[i].RecipeName)!)
+        }
+        let vc = RecipeListViewController(items: Rname)
+        vc.title = CategoryName
+        navigationController?.pushViewController(vc,animated: true)
     }
 }
