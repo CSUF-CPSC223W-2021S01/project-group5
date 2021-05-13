@@ -98,6 +98,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A0930BC264CE1B5007342B2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A0E4871125F99B6300ACC3D5 /* ViewController.swift */,
+				2AD09F942649054700BAC1BD /* CategoriesViewController.swift */,
+				A0F9AE6F260748A2001A4AE3 /* RecipeViewController.swift */,
+				A0F9AE74260773DC001A4AE3 /* RecipeCollectionViewCell.swift */,
+				A01F986A2620FAE600F38296 /* RecipeTableViewCell.swift */,
+				A01F986B2620FAE600F38296 /* RecipeTableViewCell.xib */,
+				2AD09F9C264AF9B900BAC1BD /* SettingsViewController.swift */,
+				A0E4870D25F99B6300ACC3D5 /* AppDelegate.swift */,
+				A0E4870F25F99B6300ACC3D5 /* SceneDelegate.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		A0E4870125F99B6300ACC3D5 = {
 			isa = PBXGroup;
 			children = (
@@ -121,24 +137,16 @@
 		A0E4870C25F99B6300ACC3D5 /* RecipeApp */ = {
 			isa = PBXGroup;
 			children = (
-				A0E4870D25F99B6300ACC3D5 /* AppDelegate.swift */,
-				A0E4870F25F99B6300ACC3D5 /* SceneDelegate.swift */,
-				A0E4871125F99B6300ACC3D5 /* ViewController.swift */,
 				A0E4871325F99B6300ACC3D5 /* Main.storyboard */,
-				2AD09F942649054700BAC1BD /* CategoriesViewController.swift */,
-				A0E4871625F99B6400ACC3D5 /* Assets.xcassets */,
 				A0E4871825F99B6400ACC3D5 /* LaunchScreen.storyboard */,
+				2A0930BC264CE1B5007342B2 /* View Controllers */,
+				A0E4871625F99B6400ACC3D5 /* Assets.xcassets */,
 				C784894A25F9F6420043C01A /* RecipeContainer.swift */,
 				2A750B1E26034522005F44AD /* Categories.swift */,
-				A0F9AE6F260748A2001A4AE3 /* RecipeViewController.swift */,
-				A0F9AE74260773DC001A4AE3 /* RecipeCollectionViewCell.swift */,
-				A0E4871B25F99B6400ACC3D5 /* Info.plist */,
-				A01F986A2620FAE600F38296 /* RecipeTableViewCell.swift */,
-				A01F986B2620FAE600F38296 /* RecipeTableViewCell.xib */,
 				2A8F6A7A2631EEB90018B49D /* Save.swift */,
 				2A8F6A7F2631EED80018B49D /* Tuple.swift */,
 				2A8F6A8D263889A40018B49D /* Objects.swift */,
-				2AD09F9C264AF9B900BAC1BD /* SettingsViewController.swift */,
+				A0E4871B25F99B6400ACC3D5 /* Info.plist */,
 			);
 			path = RecipeApp;
 			sourceTree = "<group>";
