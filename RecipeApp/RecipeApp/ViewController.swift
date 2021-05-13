@@ -5,7 +5,7 @@
 //  Created by Mark Gonzalez on 3/10/21.
 //
 // everything is tested with an iPhone 11 sim
-// 
+//
 
 import UIKit
 
@@ -37,8 +37,8 @@ func loadTest() {
 }
 
 class ViewController: UIViewController,
-                      UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
+    UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+{
     var displayList: [RecipeContainer]!
 
     override func viewDidLoad() {
@@ -51,9 +51,9 @@ class ViewController: UIViewController,
         displayList = MasterList
     }
 
-//==================================================================
-// Search bar code
-//==================================================================
+    //==================================================================
+    // Search bar code
+    //==================================================================
     @IBOutlet var searchDropMenuButton: UIButton!
     @IBOutlet var searchDropItem: [UIButton]!
 
@@ -64,7 +64,7 @@ class ViewController: UIViewController,
 
     // hides/unhides search drop menu items
     @IBAction func searchDropMenuPressed(_ sender: UIButton) {
-        searchDropItem.forEach { (item) in
+        searchDropItem.forEach { item in
             item.isHidden = !item.isHidden
         }
     }
@@ -89,9 +89,9 @@ class ViewController: UIViewController,
         recipeCollectionView.reloadData()
     }
 
-//==================================================================
-// Segue code
-//==================================================================
+    //==================================================================
+    // Segue code
+    //==================================================================
     // generic segue to recipe view
     @IBAction func go2recipes(_ sender: Any?) {
         performSegue(withIdentifier: "mainMenu2recipeMenu", sender: sender)
@@ -103,7 +103,7 @@ class ViewController: UIViewController,
         newView.mainMenu = self
         switch sender {
         case is UIButton: // segue for adding a recipe
-            let newRecipe = RecipeContainer("New Recipe", "", ["": ""], [Tuple("",nil)], "")
+            let newRecipe = RecipeContainer("New Recipe", "", ["": ""], [Tuple("", nil)], "")
             MasterList.append(newRecipe)
             displayList = MasterList
             newView.currRecipe = displayList.last
@@ -114,14 +114,15 @@ class ViewController: UIViewController,
             print("segue failed")
         }
     }
-//==================================================================
-// Recipe collection view code
-//==================================================================
+
+    //==================================================================
+    // Recipe collection view code
+    //==================================================================
     @IBOutlet var recipeCollectionView: UICollectionView!
-    let cellSize: CGFloat = CGFloat(184.0) //X by X (good sizes are 184, 118, 52 -> 2, 3, 4 tiles)
+    let cellSize = CGFloat(184.0) // X by X (good sizes are 184, 118, 52 -> 2, 3, 4 tiles)
     let tileColors: [UIColor] = [UIColor.systemRed, UIColor.systemOrange, UIColor.systemYellow,
                                  UIColor.systemGreen, UIColor.systemBlue, UIColor.systemPurple]
-    
+
     // should return size of recipe array
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return displayList.count
@@ -156,7 +157,7 @@ class ViewController: UIViewController,
 
     // goes to recipe view when a cell is tapped
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //recipeCollectionView.deselectItem(at: indexPath, animated: true)
+        // recipeCollectionView.deselectItem(at: indexPath, animated: true)
         go2recipes(indexPath)
     }
 
@@ -164,8 +165,4 @@ class ViewController: UIViewController,
     func reloadCollectionView() {
         recipeCollectionView.reloadData()
     }
-    
-    
-    
 }
-

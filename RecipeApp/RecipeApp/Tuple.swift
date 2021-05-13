@@ -15,16 +15,16 @@ import Foundation
 // Any time you need to assign a tuple of type (String, Int?) to an element
 // in steps, use this syntax:
 //      Steps[index] = Tuple(myString, myIntOpt)
-class Tuple: Codable{
+class Tuple: Codable {
     var instruction: String
     var duration: Int?
-    init(_ instruction: String, _ duration: Int?){
+    init(_ instruction: String, _ duration: Int?) {
         self.instruction = instruction
         self.duration = duration
     }
-    init( instruction: String,  duration: Int?){
+
+    init(instruction: String, duration: Int?) {
         self.instruction = instruction
         self.duration = duration
     }
 }
-

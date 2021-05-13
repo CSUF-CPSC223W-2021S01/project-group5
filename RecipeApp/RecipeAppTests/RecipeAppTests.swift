@@ -63,7 +63,7 @@ class RecipeAppTests: XCTestCase {
     
     func testCategories() {
         let myCategories = C_Categories()
-        XCTAssertNotNil(myCategories.Categories	)
+        XCTAssertNotNil(myCategories.Categories)
     } // tests if there is existing content within the Categories variable
 
     func testAddCategory() {

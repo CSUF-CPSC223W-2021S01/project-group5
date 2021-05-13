@@ -7,8 +7,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController{
-    
+class SettingsViewController: UIViewController {
     var lightOn = true
     
     override func viewDidLoad() {

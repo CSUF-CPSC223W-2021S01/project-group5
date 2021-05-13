@@ -10,8 +10,7 @@
 
 import Foundation
 
-
-class C_Categories: Codable{
+class C_Categories: Codable {
     // Category Dictionary. key is name of category, value is array of recipes in category
     var Categories: [String: [RecipeContainer]] = ["All": MasterList]
 }
@@ -92,5 +91,4 @@ extension C_Categories {
         Categories[CName]?.remove(at: RecIndex)
         return (true, Categories[CName]!.count)
     } // end of RemoveRecFromCat()
-    
-}// end of C_Categories
+} // end of C_Categories
