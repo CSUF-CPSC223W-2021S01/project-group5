@@ -8,9 +8,9 @@
 import UIKit
 
 class RecipeViewController: UIViewController,
-                            UITableViewDelegate, UITableViewDataSource,
-                            UITextViewDelegate{
-
+    UITableViewDelegate, UITableViewDataSource,
+    UITextViewDelegate
+{
     var rImage: UIImage?
     var currRecipe: RecipeContainer!
     var mainMenu: ViewController!
@@ -27,8 +27,8 @@ class RecipeViewController: UIViewController,
         tableView.delegate = self
         tableView.dataSource = self
 
-        self.navigationItem.title = currRecipe.RecipeName
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButton))
+        navigationItem.title = currRecipe.RecipeName
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButton))
 
         if let image = UIImage(named: currRecipe.RecipeName) {
             recipeImage.image = image
@@ -38,9 +38,10 @@ class RecipeViewController: UIViewController,
             loadIngredients.append((ingredient.key, ingredient.value))
         }
     }
-//================================================================================================
-// segue code
-//================================================================================================
+
+    //================================================================================================
+    // segue code
+    //================================================================================================
 
     // called when returning
     // used to reload collection view to reflect potential changes
@@ -48,9 +49,10 @@ class RecipeViewController: UIViewController,
         print("TESTEST")
         mainMenu.reloadCollectionView()
     }
-//================================================================================================
-// table view code - custom
-//================================================================================================
+
+    //================================================================================================
+    // table view code - custom
+    //================================================================================================
 
     //
     //               section , rows
@@ -64,7 +66,6 @@ class RecipeViewController: UIViewController,
 
     var editable: Bool = false
     var addButtons: (i: UIButton, s: UIButton) = (UIButton(), UIButton())
-
 
     @objc func addRow(sender: UIButton) {
         let point = sender.convert(CGPoint.zero, to: tableView)
@@ -92,19 +93,19 @@ class RecipeViewController: UIViewController,
 
         // always leaves 1 row available for editing
         if tableView.numberOfRows(inSection: indexPath!.section) == 1 {
-            addRow(sender: isIngredient ? addButtons.i : addButtons.s )
+            addRow(sender: isIngredient ? addButtons.i : addButtons.s)
         }
     }
 
     @objc func editButton(sender: UIBarButtonItem) {
         editable = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButton))
         tableView.reloadData()
     }
 
     @objc func saveButton(sender: UIBarButtonItem) {
         editable = false
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButton))
         currRecipe.Ingredients.removeAll()
         for ingredient in loadIngredients {
             currRecipe.Ingredients[ingredient.key] = ingredient.value
@@ -120,7 +121,7 @@ class RecipeViewController: UIViewController,
         case "I":
             switch sender.tag {
             case 100:
-                guard sender.text != "" else {return}
+                guard sender.text != "" else { return }
                 loadIngredients[index!.row].key = sender.text!
             case 101:
                 loadIngredients[index!.row].value = sender.text!
@@ -134,9 +135,8 @@ class RecipeViewController: UIViewController,
             case 101:
                 if sender.text == "" {
                     currRecipe.Steps[index!.row].duration = nil
-                }
-                else {
-                    guard let time = Int(sender.text!) else {return}
+                } else {
+                    guard let time = Int(sender.text!) else { return }
                     currRecipe.Steps[index!.row].duration = time
                 }
             default:
@@ -152,7 +152,7 @@ class RecipeViewController: UIViewController,
         let index = tableView.indexPathForRow(at: point)
         switch index!.section {
         case 0: // name
-            guard textView.text != "" else {return}
+            guard textView.text != "" else { return }
             currRecipe.RecipeName = textView.text
         case 2: // description
             currRecipe.Description = textView.text
@@ -160,9 +160,10 @@ class RecipeViewController: UIViewController,
             print("textViewEdit error")
         }
     }
-//================================================================================================
-// table view code - default
-//================================================================================================
+
+    //================================================================================================
+    // table view code - default
+    //================================================================================================
     func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }

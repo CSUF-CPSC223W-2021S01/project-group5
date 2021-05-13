@@ -17,15 +17,15 @@ let CAT_URL = myDocDir.appendingPathComponent("Category").appendingPathExtension
 // Output:      N/A
 // =============================================================================
 func SaveData() {
-    //Save the MasterList array into a file called MasterList.plist
+    // Save the MasterList array into a file called MasterList.plist
     let plistEncoder = PropertyListEncoder()
     if let encodedMasterList = try? plistEncoder.encode(MasterList),
-       let encodedCategories = try? plistEncoder.encode(Categories) {
+       let encodedCategories = try? plistEncoder.encode(Categories)
+    {
         try? encodedMasterList.write(to: ML_URL)
         try? encodedCategories.write(to: CAT_URL)
     }
-    
-}// end of SaveData()
+} // end of SaveData()
 
 // LoadData ====================================================================
 // Description: Decodes data from URL then saves to coresponding objects
@@ -33,17 +33,17 @@ func SaveData() {
 // Output:      true if decoded data was saved to MasterList
 //              false on failure
 // =============================================================================
-func LoadData() -> Bool{
+func LoadData() -> Bool {
     let plistDecoder = PropertyListDecoder()
     if let retMLData = try? Data(contentsOf: ML_URL),
        let decodedML = try? plistDecoder.decode([RecipeContainer].self, from: retMLData),
        let retCATData = try? Data(contentsOf: CAT_URL),
        let decodedCAT = try? plistDecoder.decode(C_Categories.self, from: retCATData)
-        {
+    {
         MasterList = decodedML
         Categories = decodedCAT
         return true
     }
-    
+
     return false
-}// end of LoadData()
+} // end of LoadData()

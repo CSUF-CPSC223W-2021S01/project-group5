@@ -7,6 +7,4 @@
 
 import UIKit
 
-class RecipeCollectionViewCell: UICollectionViewCell {
-    
-}
+class RecipeCollectionViewCell: UICollectionViewCell {}

@@ -8,9 +8,8 @@
 import UIKit
 
 class CategoriesViewController: UIViewController {
-    
-    //var CatKeys: [String] = Array(Categories.Categories.keys)
-    var CatKeys: [String] = ["Healthy","Burgers","Japanese","Italian","Spicy"]
+    // var CatKeys: [String] = Array(Categories.Categories.keys)
+    var CatKeys: [String] = ["Healthy", "Burgers", "Japanese", "Italian", "Spicy"]
     
     @IBOutlet var CatButton: UIButton!
     @IBOutlet var CatTableView: UITableView!
@@ -22,7 +21,6 @@ class CategoriesViewController: UIViewController {
     }
 }
 
-
 extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CatKeys.count
@@ -30,15 +28,12 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = CatTableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        cell.textLabel?.text = CatKeys[indexPath.row]	
+        cell.textLabel?.text = CatKeys[indexPath.row]
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
         print("Selected \(CatKeys[indexPath.row])")
     }
-    
-    
 }
