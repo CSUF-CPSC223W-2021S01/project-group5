@@ -29,7 +29,7 @@ func SaveData() {
 
 // LoadData ====================================================================
 // Description: Decodes data from URL then saves to coresponding objects
-// Input:       N/A
+// Input:       N/A 
 // Output:      true if decoded data was saved to MasterList
 //              false on failure
 // =============================================================================
