@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A0930C1264D0A47007342B2 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0930C0264D0A47007342B2 /* RecipeListViewController.swift */; };
 		2A750B1F26034522005F44AD /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A750B1E26034522005F44AD /* Categories.swift */; };
 		2A8F6A7B2631EEB90018B49D /* Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8F6A7A2631EEB90018B49D /* Save.swift */; };
 		2A8F6A802631EED80018B49D /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8F6A7F2631EED80018B49D /* Tuple.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A0930C0264D0A47007342B2 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		2A750B1E26034522005F44AD /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		2A8F6A7A2631EEB90018B49D /* Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save.swift; sourceTree = "<group>"; };
 		2A8F6A7F2631EED80018B49D /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				A0E4871125F99B6300ACC3D5 /* ViewController.swift */,
 				2AD09F942649054700BAC1BD /* CategoriesViewController.swift */,
+				2A0930C0264D0A47007342B2 /* RecipeListViewController.swift */,
 				A0F9AE6F260748A2001A4AE3 /* RecipeViewController.swift */,
 				A0F9AE74260773DC001A4AE3 /* RecipeCollectionViewCell.swift */,
 				A01F986A2620FAE600F38296 /* RecipeTableViewCell.swift */,
@@ -312,6 +315,7 @@
 				A0E4871025F99B6300ACC3D5 /* SceneDelegate.swift in Sources */,
 				2AD09F9D264AF9B900BAC1BD /* SettingsViewController.swift in Sources */,
 				C784894B25F9F6420043C01A /* RecipeContainer.swift in Sources */,
+				2A0930C1264D0A47007342B2 /* RecipeListViewController.swift in Sources */,
 				A01F986C2620FAE600F38296 /* RecipeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
