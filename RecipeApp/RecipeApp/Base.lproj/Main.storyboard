@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2U9-8N-O00">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2U9-8N-O00">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--All Recipes-->
+        <!--Main Menu-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -182,7 +182,7 @@
                             <constraint firstItem="dKL-Tr-lW2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="zCi-wq-5k8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="All Recipes" id="QCr-d7-2ZT"/>
+                    <navigationItem key="navigationItem" title="Main Menu" id="QCr-d7-2ZT"/>
                     <connections>
                         <outlet property="recipeCollectionView" destination="qt0-BY-GBG" id="775-dY-AjH"/>
                         <outlet property="searchDropMenuButton" destination="tpd-oh-R3Y" id="OlH-d2-Pcc"/>
@@ -209,15 +209,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Contrast Mode"/>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="lj3-6i-v1H" eventType="touchUpInside" id="ZYs-uK-j0L"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NVF-CV-FH5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WdF-8a-G6l"/>
+                    <navigationItem key="navigationItem" title="Settings" id="WdF-8a-G6l"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XwV-kl-vHX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -250,7 +247,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="Zxv-0H-fft">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zxv-0H-fft" id="cSn-62-hjc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -290,7 +287,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="step" id="Exw-FO-meg">
-                                                <rect key="frame" x="0.0" y="24.5" width="414" height="39"/>
+                                                <rect key="frame" x="0.0" y="28" width="414" height="39"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Exw-FO-meg" id="8fN-kf-L4y">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
@@ -337,7 +334,7 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="plain" id="76h-XD-AFr">
-                                                <rect key="frame" x="0.0" y="63.5" width="414" height="194"/>
+                                                <rect key="frame" x="0.0" y="67" width="414" height="194"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="76h-XD-AFr" id="W8h-kr-TuS">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="194"/>
@@ -364,7 +361,7 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="add" id="bs8-d1-nwS">
-                                                <rect key="frame" x="0.0" y="257.5" width="414" height="44"/>
+                                                <rect key="frame" x="0.0" y="261" width="414" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bs8-d1-nwS" id="zqu-rl-DFQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -408,11 +405,11 @@
             </objects>
             <point key="canvasLocation" x="2694" y="-218"/>
         </scene>
-        <!--All Recipes-->
+        <!--Main Menu-->
         <scene sceneID="hVb-uW-JeM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1rx-bP-Aya" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="All Recipes" id="xLZ-4j-O91"/>
+                    <tabBarItem key="tabBarItem" title="Main Menu" id="xLZ-4j-O91"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RuW-TV-dT3">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
