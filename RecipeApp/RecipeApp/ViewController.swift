@@ -105,7 +105,8 @@ class ViewController: UIViewController,
         case is UIButton: // segue for adding a recipe
             let newRecipe = RecipeContainer("New Recipe", "", ["": ""], [Tuple("",nil)], "")
             MasterList.append(newRecipe)
-            newView.currRecipe = MasterList.last
+            displayList = MasterList
+            newView.currRecipe = displayList.last
         case is IndexPath: // segue for selecting recipe
             let index = sender as! IndexPath
             newView.currRecipe = displayList[index.row]

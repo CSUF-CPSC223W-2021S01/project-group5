@@ -8,7 +8,8 @@
 import UIKit
 
 class RecipeViewController: UIViewController,
-                            UITableViewDelegate, UITableViewDataSource {
+                            UITableViewDelegate, UITableViewDataSource,
+                            UITextViewDelegate{
 
     var rImage: UIImage?
     var currRecipe: RecipeContainer!
@@ -38,10 +39,13 @@ class RecipeViewController: UIViewController,
         }
     }
 //================================================================================================
-// segue code - for returning
+// segue code
 //================================================================================================
 
+    // called when returning
+    // used to reload collection view to reflect potential changes
     override func viewWillDisappear(_ animated: Bool) {
+        print("TESTEST")
         mainMenu.reloadCollectionView()
     }
 //================================================================================================
@@ -53,28 +57,13 @@ class RecipeViewController: UIViewController,
     // name -        0       , 1
     // time -        1       , 1
     // description - 2       , 1
-    // ingredients - 3       , ingredients.count + 1
-    // steps -       4       , steps.count + 1
+    // ingredients - 3       , ingredients.count + 1 for add button
+    // steps -       4       , steps.count + 1 for add button
     //
-    // todo: add headers for each section
-    // todo: delete button should only delete after saving
     //
 
     var editable: Bool = false
     var addButtons: (i: UIButton, s: UIButton) = (UIButton(), UIButton())
-
-    var indices = [(IndexPath, Any)]()
-    // use: stores index path and contents of all cells. "Any" can be UITextView or (UITextField, UITextField, UIButton)
-    //
-    // problems: indices sometimes retains useless data after removing an element
-    // solution: don't use indicies
-    //
-    // use case 1: updating editability of cells
-    // replacement 1: use tableView.reloadData() in editButton() after changing editable
-    //
-    // use case 2: saving
-    // replacement 1: go through every cell with tableView
-    // replacement 2: somehow save immediately after editing
 
 
     @objc func addRow(sender: UIButton) {
@@ -86,17 +75,6 @@ class RecipeViewController: UIViewController,
             currRecipe.Steps.append(Tuple("", nil))
         }
         tableView.insertRows(at: [indexPath!], with: .top)
-        if let cell = tableView.cellForRow(at: indexPath!) {
-            let field1 = cell.contentView.viewWithTag(100) as! UITextField
-            let field2 = cell.contentView.viewWithTag(101) as! UITextField
-            let field3 = cell.contentView.viewWithTag(102) as! UIButton
-            field1.isEnabled = editable
-            field2.isEnabled = editable
-            field3.isHidden = !editable
-            field3.accessibilityIdentifier = sender.accessibilityIdentifier
-            // print("inserting at \(indexPath!.row):\(indexPath!.section)")
-            indices.append((indexPath!, (field1, field2, field3)))
-        }
     }
 
     @objc func deleteRow(sender: UIButton) {
@@ -104,26 +82,15 @@ class RecipeViewController: UIViewController,
         let indexPath = tableView.indexPathForRow(at: point)
         let isIngredient: Bool = sender.accessibilityIdentifier == "I"
 
-        guard let oldIndex = indices.firstIndex(where: { index, _ in
-            // print("\(index.row), \(index.section) : \(indexPath!.row), \(indexPath!.section)")
-            return index == indexPath!
-        }) else {
-            print("Error: deleteRow() guard broken. aborting delete.")
-            return
-        }
-
         if isIngredient {
             loadIngredients.remove(at: indexPath!.row)
         } else {
             currRecipe.Steps.remove(at: indexPath!.row)
         }
 
-        // print("removing at \(indexPath!.row):\(indexPath!.section) and \(oldIndex)")
-        // print()
-
-        indices.remove(at: oldIndex)
         tableView.deleteRows(at: [indexPath!], with: .top)
 
+        // always leaves 1 row available for editing
         if tableView.numberOfRows(inSection: indexPath!.section) == 1 {
             addRow(sender: isIngredient ? addButtons.i : addButtons.s )
         }
@@ -132,77 +99,65 @@ class RecipeViewController: UIViewController,
     @objc func editButton(sender: UIBarButtonItem) {
         editable = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButton))
-        walkIndices()
-        addButtons.i.isHidden = false
-        addButtons.s.isHidden = false
+        tableView.reloadData()
     }
 
     @objc func saveButton(sender: UIBarButtonItem) {
         editable = false
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButton))
-        walkIndices()
-        addButtons.i.isHidden = true
-        addButtons.s.isHidden = true
+        currRecipe.Ingredients.removeAll()
+        for ingredient in loadIngredients {
+            currRecipe.Ingredients[ingredient.key] = ingredient.value
+        }
+        tableView.reloadData()
         SaveData()
     }
 
-    func walkIndices() {
-        // index is an IndexPath
-        // cell is whatever the content of the cell was. (stored in a tuple if a cell has more than one item)
-        for (index, cell) in indices {
-            switch index.section {
-            case 0:
-                let row = cell as! UITextView
-                if !editable { // is saving
-                    currRecipe.RecipeName = row.text
-                }
-                row.isEditable = editable
-            case 1:
-                print("total time")
-                /*
-                let row = cell as! UITextView
-                if !editable { // is saving
-                    currRecipe.TotalTime = Int(row.text)
-                }
-                row.isEditable = editable
-                */
-            case 2:
-                let row = cell as! UITextView
-                if !editable { // is saving
-                    currRecipe.Description = row.text
-                }
-                row.isEditable = editable
-            case 3:
-                let row = cell as! (UITextField, UITextField, UIButton)
-                let ingredient = row.0
-                let quantity = row.1
-                let btn = row.2
-                if !editable { // is saving
-                    currRecipe.Ingredients.removeValue(forKey: loadIngredients[index.row].key)
-                    currRecipe.Ingredients[ingredient.text!] = quantity.text!
-                    loadIngredients[index.row] = (ingredient.text!, quantity.text!)
-                }
-                ingredient.isEnabled = editable
-                quantity.isEnabled = editable
-                btn.isHidden = !editable // false if editing
-            case 4:
-                let row = cell as! (UITextField, UITextField, UIButton)
-                let step = row.0
-                let duration = row.1
-                let btn = row.2
-                if !editable { // is saving
-                    if duration.text != "" {
-                        currRecipe.Steps[index.row] = Tuple(step.text!, Int(duration.text!))
-                    } else {
-                        currRecipe.Steps[index.row] = Tuple(step.text!, nil)
-                    }
-                }
-                step.isEnabled = editable
-                duration.isEnabled = editable
-                btn.isHidden = !editable // false if editing
+    @objc func textFieldDoneEditing(_ sender: UITextField) {
+        let point = sender.convert(CGPoint.zero, to: tableView)
+        let index = tableView.indexPathForRow(at: point)
+        switch sender.accessibilityIdentifier {
+        case "I":
+            switch sender.tag {
+            case 100:
+                guard sender.text != "" else {return}
+                loadIngredients[index!.row].key = sender.text!
+            case 101:
+                loadIngredients[index!.row].value = sender.text!
             default:
-                print("error: indices: \(index.section), \(index.row), \(editable)")
+                print("textFieldEdit error: tag:\(sender.tag)")
             }
+        case "S":
+            switch sender.tag {
+            case 100:
+                currRecipe.Steps[index!.row].instruction = sender.text!
+            case 101:
+                if sender.text == "" {
+                    currRecipe.Steps[index!.row].duration = nil
+                }
+                else {
+                    guard let time = Int(sender.text!) else {return}
+                    currRecipe.Steps[index!.row].duration = time
+                }
+            default:
+                print("textFieldEdit error: tag:\(sender.tag)")
+            }
+        default:
+            print("textFieldEdit accessibilityIdetifier error")
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        let point = textView.convert(CGPoint.zero, to: tableView)
+        let index = tableView.indexPathForRow(at: point)
+        switch index!.section {
+        case 0: // name
+            guard textView.text != "" else {return}
+            currRecipe.RecipeName = textView.text
+        case 2: // description
+            currRecipe.Description = textView.text
+        default:
+            print("textViewEdit error")
         }
     }
 //================================================================================================
@@ -244,31 +199,50 @@ class RecipeViewController: UIViewController,
         switch indexPath.section {
         case 0: // name
             cell = tableView.dequeueReusableCell(withIdentifier: "plain", for: indexPath)
-            let text = cell.contentView.viewWithTag(100) as! UITextView
-            text.text = currRecipe.RecipeName
-            indices.append((indexPath, text))
+            let name = cell.contentView.viewWithTag(100) as! UITextView
+            name.delegate = self
+            name.isEditable = editable
+
+            // set name
+            name.text = currRecipe.RecipeName
         case 1: // cooking time
             cell = tableView.dequeueReusableCell(withIdentifier: "plain", for: indexPath)
-            let text = cell.contentView.viewWithTag(100) as! UITextView
-            text.text = currRecipe.TotalTime
-            indices.append((indexPath, text))
+            let time = cell.contentView.viewWithTag(100) as! UITextView
+
+            // set cooking time
+            time.text = currRecipe.TotalTime
         case 2: // description
             cell = tableView.dequeueReusableCell(withIdentifier: "plain", for: indexPath)
-            let text = cell.contentView.viewWithTag(100) as! UITextView
-            text.text = currRecipe.Description
-            indices.append((indexPath, text))
+            let description = cell.contentView.viewWithTag(100) as! UITextView
+            description.delegate = self
+            description.isEditable = editable
+
+            // set description
+            description.text = currRecipe.Description
         case 3: // ingredients
             if indexPath.row < loadIngredients.count {
                 cell = tableView.dequeueReusableCell(withIdentifier: "step", for: indexPath)
-                let ingredient = cell.contentView.viewWithTag(100) as! UITextField
-                let quantity = cell.contentView.viewWithTag(101) as! UITextField
-                let delBtn = cell.contentView.viewWithTag(102) as! UIButton
 
-                ingredient.text = loadIngredients[indexPath.row].key
-                quantity.text = loadIngredients[indexPath.row].value
+                let ingredient = cell.contentView.viewWithTag(100) as! UITextField
+                ingredient.isEnabled = editable
+                ingredient.accessibilityIdentifier = "I"
+                ingredient.addTarget(self, action: #selector(textFieldDoneEditing), for: .editingDidEndOnExit)
+                ingredient.addTarget(self, action: #selector(textFieldDoneEditing), for: .editingDidEnd)
+
+                let quantity = cell.contentView.viewWithTag(101) as! UITextField
+                quantity.isEnabled = editable
+                quantity.accessibilityIdentifier = "I"
+                quantity.addTarget(self, action: #selector(textFieldDoneEditing), for: .editingDidEndOnExit)
+                quantity.addTarget(self, action: #selector(textFieldDoneEditing), for: .editingDidEnd)
+
+                let delBtn = cell.contentView.viewWithTag(102) as! UIButton
+                delBtn.isHidden = !editable
+                delBtn.accessibilityIdentifier = "I"
                 delBtn.addTarget(self, action: #selector(deleteRow), for: .touchUpInside)
 
-                indices.append((indexPath, (ingredient, quantity, delBtn)))
+                // set ingredient and quantity
+                ingredient.text = loadIngredients[indexPath.row].key
+                quantity.text = loadIngredients[indexPath.row].value
             } else { // extra row for add button
                 cell = tableView.dequeueReusableCell(withIdentifier: "add", for: indexPath)
                 let add = cell.contentView.viewWithTag(100) as! UIButton
@@ -280,27 +254,39 @@ class RecipeViewController: UIViewController,
         case 4: // steps
             if indexPath.row < currRecipe.Steps.count {
                 cell = tableView.dequeueReusableCell(withIdentifier: "step", for: indexPath)
-                let instruction = cell.contentView.viewWithTag(100) as! UITextField
-                let duration = cell.contentView.viewWithTag(101) as! UITextField
-                let delBtn = cell.contentView.viewWithTag(102) as! UIButton
 
+                let instruction = cell.contentView.viewWithTag(100) as! UITextField
+                instruction.isEnabled = editable
+                instruction.accessibilityIdentifier = "S"
+                instruction.addTarget(self, action: #selector(textFieldDoneEditing), for: .editingDidEndOnExit)
+                instruction.addTarget(self, action: #selector(textFieldDoneEditing), for: .editingDidEnd)
+
+                let duration = cell.contentView.viewWithTag(101) as! UITextField
+                duration.isEnabled = editable
+                duration.accessibilityIdentifier = "S"
+                duration.addTarget(self, action: #selector(textFieldDoneEditing), for: .editingDidEndOnExit)
+                duration.addTarget(self, action: #selector(textFieldDoneEditing), for: .editingDidEnd)
+
+                let delBtn = cell.contentView.viewWithTag(102) as! UIButton
+                delBtn.isHidden = !editable
+                delBtn.accessibilityIdentifier = "S"
+                delBtn.addTarget(self, action: #selector(deleteRow), for: .touchUpInside)
+
+                // set instruction and duration
                 instruction.text = currRecipe.Steps[indexPath.row].instruction
+                // set duration to "" if value is nil
                 if let t = currRecipe.Steps[indexPath.row].duration {
                     duration.text = String(t)
                 } else {
                     duration.text = ""
                 }
-                delBtn.accessibilityIdentifier = "S"
-                delBtn.addTarget(self, action: #selector(deleteRow), for: .touchUpInside)
-
-                indices.append((indexPath, (instruction, duration, delBtn)))
             } else { // extra row for add button
                 cell = tableView.dequeueReusableCell(withIdentifier: "add", for: indexPath)
                 let add = cell.contentView.viewWithTag(100) as! UIButton
-                add.isHidden = !editable
-                addButtons.s = add
                 add.accessibilityIdentifier = "S"
                 add.addTarget(self, action: #selector(addRow), for: .touchUpInside)
+                add.isHidden = !editable
+                addButtons.s = add
             }
         default:
             cell = tableView.dequeueReusableCell(withIdentifier: "plain", for: indexPath)
